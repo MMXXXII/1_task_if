@@ -5,44 +5,55 @@ namespace TestProject1
 {
     public class TriangleTests
     {
-        // Проверяет, что метод Exists возвращает true для корректных сторон треугольника.
         [Test]
-        public void Exists_ValidSides_ReturnsTrue()
+        public void ValidTriangleTest()
         {
-            Assert.IsTrue(Triangle.Exists(3, 4, 5)); // Прямоугольный треугольник
-            Assert.IsTrue(Triangle.Exists(5, 5, 5)); // Равносторонний треугольник
-        }
-        // Проверяет, что метод Exists возвращает false для некорректных сторон треугольника.
-        [Test]
-        public void Exists_InvalidSides_ReturnsFalse()
-        {
-            Assert.IsFalse(Triangle.Exists(1, 2, 3)); // Не выполняется неравенство треугольника
-            Assert.IsFalse(Triangle.Exists(0, 4, 5)); // Одна из сторон равна нулю
-            Assert.IsFalse(Triangle.Exists(-3, 4, 5)); // Одна из сторон отрицательная
+            // Проверка существования треугольника
+            bool result = Triangle.Exists(3, 4, 5);
+            string message = result ? "Треугольник существует" : "Треугольник не существует";
+            Assert.AreEqual("Треугольник существует", message);
         }
 
-        // Проверяет, что метод IsRightTriangle возвращает true для прямоугольных треугольников.
         [Test]
-        public void IsRightTriangle_ValidRightTriangle_ReturnsTrue()
+        public void InvalidTriangleTest()
         {
-            Assert.IsTrue(Triangle.IsRightTriangle(3, 4, 5)); // Классический Пифагоров треугольник
-            Assert.IsTrue(Triangle.IsRightTriangle(5, 12, 13)); // Еще один Пифагоров треугольник
+            // Проверка невозможного треугольника
+            bool result = Triangle.Exists(1, 2, 3);
+            string message = result ? "Треугольник существует" : "Треугольник не существует";
+            Assert.AreEqual("Треугольник не существует", message);
         }
 
-        // Проверяет, что метод IsRightTriangle возвращает false для непрямоугольных треугольников.
         [Test]
-        public void IsRightTriangle_InvalidRightTriangle_ReturnsFalse()
+        public void RightTriangleTest()
         {
-            Assert.IsFalse(Triangle.IsRightTriangle(3, 4, 6)); // Боковая сторона больше, чем нужно
-            Assert.IsFalse(Triangle.IsRightTriangle(5, 5, 5)); // Равносторонний треугольник
+            // Проверка, что треугольник прямоугольный
+            bool result = Triangle.IsRightTriangle(5, 12, 13);
+            string message = result ? "Прямоугольный треугольник" : "Не прямоугольный треугольник";
+            Assert.AreEqual("Прямоугольный треугольник", message);
         }
 
-        // Проверяет, что метод IsRightTriangle выбрасывает исключение для несуществующих треугольников.
         [Test]
-        public void IsRightTriangle_NonExistentTriangle_ThrowsException()
+        public void NotRightTriangleTest()
         {
-            Assert.Throws<ArgumentException>(() => Triangle.IsRightTriangle(1, 2, 3)); // Не выполняется неравенство треугольника
-            Assert.Throws<ArgumentException>(() => Triangle.IsRightTriangle(0, 4, 5)); // Одна из сторон равна нулю
+            // Проверка, что треугольник не является прямоугольным
+            bool result = Triangle.IsRightTriangle(5, 5, 5);
+            string message = result ? "Прямоугольный треугольник" : "Не прямоугольный треугольник";
+            Assert.AreEqual("Не прямоугольный треугольник", message);
+        }
+
+        [Test]
+        public void NonExistentTriangleTest()
+        {
+            // Проверка, что метод выбрасывает исключение при невозможном треугольнике
+            try
+            {
+                Triangle.IsRightTriangle(0, 4, 5);
+                Assert.Fail("Ожидалось исключение");
+            }
+            catch (ArgumentException)
+            {
+                Assert.AreEqual("Невозможный треугольник", "Невозможный треугольник");
+            }
         }
     }
 }

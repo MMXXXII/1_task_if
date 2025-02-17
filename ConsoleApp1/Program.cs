@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Даны вещественные положительные числа a, b, c. Если существует треугольник со сторонами a, b, c, то определить, является ли он прямоугольным.
+using System;
+
 
 public class Triangle
 {
@@ -14,7 +16,6 @@ public class Triangle
             throw new ArgumentException("Треугольник с такими сторонами не существует");
         }
         int[] sides = { a, b, c };
-        Array.Sort(sides); // Гарантируем, что гипотенуза будет последним элементом
         return Math.Pow(sides[0], 2) + Math.Pow(sides[1], 2) == Math.Pow(sides[2], 2);
     }
 
